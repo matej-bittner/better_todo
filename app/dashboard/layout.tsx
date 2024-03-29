@@ -1,9 +1,8 @@
 import "@/app/globals.css";
 
 import NavLeft from "@/components/shared/dashboard/NavLeft";
-import ModalLayout from "@/components/shared/ModalLayout";
+
 import React from "react";
-import Provider from "@/components/shared/Provider";
 
 export default function layout({
   children,

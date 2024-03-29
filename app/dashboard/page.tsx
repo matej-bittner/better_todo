@@ -23,6 +23,9 @@ async function getTodoFromDb() {
 }
 const Page = async () => {
   const todos = await getTodoFromDb();
+  const filteredTodos = todos.filter(
+    (item) => item.finishDate === "2024-03-30",
+  );
   // const session = await getServerSession(authOptions);
   // console.log(session);
   const user = await getCurrentUser();
@@ -45,7 +48,7 @@ const Page = async () => {
         </div>
       </div>
       <div className="space-y-3">
-        {todos.map((item) => (
+        {filteredTodos.map((item) => (
           <TodoItem
             title={item.title}
             content={item.content}
@@ -54,6 +57,15 @@ const Page = async () => {
             key={item.id}
           />
         ))}
+        {/*{todos.map((item) => (*/}
+        {/*  <TodoItem*/}
+        {/*    title={item.title}*/}
+        {/*    content={item.content}*/}
+        {/*    finishDate={item.finishDate}*/}
+        {/*    id={item.id}*/}
+        {/*    key={item.id}*/}
+        {/*  />*/}
+        {/*))}*/}
       </div>
     </section>
   );

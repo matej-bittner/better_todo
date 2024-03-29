@@ -43,7 +43,7 @@ const NavLeft = () => {
         </div>
       </div>
       <div className="flex flex-col text-[36px] flex-1 font-light gap-4 pl-4">
-        <Link href="">Dnes</Link>
+        <Link href="?tommorow=true">Dnes</Link>
         <Link href="">Zítra</Link>
         <Link href="">Tento týden</Link>
         <Link href="">Vše</Link>

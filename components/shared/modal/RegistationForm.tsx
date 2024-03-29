@@ -4,20 +4,33 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
-type Inputs = {
-  name: string;
-  surname: string;
-  email: string;
-  password: string;
-};
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+  name: z.string(),
+  surname: z.string(),
+});
+
+type FormFields = z.infer<typeof schema>;
+
 export function RegistationForm() {
+  const router = useRouter();
   const { toast } = useToast();
-  const { register, handleSubmit, reset } = useForm<Inputs>();
-  const createUser: SubmitHandler<Inputs> = async (registerData) => {
+  const { register, handleSubmit } = useForm<FormFields>({
+    resolver: zodResolver(schema),
+  });
+  const createUser: SubmitHandler<FormFields> = async (registerData) => {
     try {
       await axios.post("/api/register", registerData);
-      reset();
+      router.push("/");
+      toast({
+        title: "Vítej!",
+        description: "Registrace Proběhla úspěšně. Můžes se přihlásit.",
+      });
     } catch (error) {
       toast({
         title: "Error",

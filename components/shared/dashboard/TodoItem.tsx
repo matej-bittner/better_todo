@@ -5,7 +5,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { IoMdClose } from "react-icons/io";
 import React from "react";
 import Link from "next/link";
 import DeleteTodoButton from "@/components/shared/dashboard/DeleteTodoButton";
@@ -23,7 +22,8 @@ export function TodoItem({ title, content, finishDate, id }: todoItemProps) {
         <div className="bg-white w-full max-w-[800px] min-h-[78px] rounded-md border-4 border-black py-1 px-4 flex items-center text-black justify-between gap-2 mx-auto">
           {/*hamburger*/}
           <Link
-            href="?modal=edit"
+            // href={`?modal=edit&id=${id}`}
+            href={`dashboard/edit-todo/${id}`}
             className="h-[30px] w-fit sm:flex flex-col justify-around  hidden"
           >
             <div className="w-[30px] h-[3px] bg-black"></div>

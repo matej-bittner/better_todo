@@ -4,13 +4,38 @@ import { IoMdClose } from "react-icons/io";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-import { RegistationForm } from "@/components/shared/RegistationForm";
-import { LoginForm } from "@/components/shared/LoginForm";
-import { AddTodoForm } from "@/components/shared/dashboard/AddTodoForm";
+import { RegistationForm } from "@/components/shared/modal/RegistationForm";
+import { LoginForm } from "@/components/shared/modal/LoginForm";
+import { AddTodoForm } from "@/components/shared/modal/AddTodoForm";
+import { EditTodoForm } from "@/components/shared/modal/EditTodoForm";
+
+// async function getIDx(id) {
+//   const res = await fetch(`/api/get-todo/${id}`, {
+//     // method: "GET",
+//     // headers: { "Content-type": "application.json" },
+//     cache: "no-store",
+//   });
+//   if (!res.ok) {
+//     throw new Error("něco se nepovedlo");
+//   }
+//
+//   return res.json();
+// }
 
 const ModalLayout = () => {
   const searchParams = useSearchParams();
   const modal = searchParams.get("modal");
+
+  let id;
+  // let x;
+
+  // if (modal === "edit") {
+  //   id = searchParams.get("id");
+  //   x =  TADY MUSÍ BEJT AWAIT  getIDx(id);
+  //
+  //   console.log(x);
+  // }
+
   const pathname = usePathname();
 
   if (!modal) {
@@ -32,7 +57,7 @@ const ModalLayout = () => {
                   ? "Registrovat"
                   : modal === "add"
                     ? "Vytvořit"
-                    : "Nastavení"}
+                    : "Editovat"}
             </h1>
           </div>
           <div className="h-full flex-1 ">
@@ -43,7 +68,7 @@ const ModalLayout = () => {
             ) : modal === "add" ? (
               <AddTodoForm />
             ) : (
-              <AddTodoForm />
+              <EditTodoForm />
             )}
           </div>
         </div>
